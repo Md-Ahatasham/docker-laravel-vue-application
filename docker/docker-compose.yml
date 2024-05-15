@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+    klassroom:
+        build:
+            context: ../
+            dockerfile: docker/app/Dockerfile
+        container_name: klassroom-container
+        restart: unless-stopped
+        volumes:
+            - ../codes/:/var/www/html
+        ports:
+            - "8001:9000"
+        networks:
+            common-net:
+                aliases:
+                    - klassroom
+
+    nginx:
+        image: nginx:alpine
+        container_name: klassroom-server-container
+        restart: unless-stopped
+        tty: true
+        ports:
+            - "8002:80"
+            - "8003:443"
+
+        volumes:
+            - ../codes/:/var/www/html
+            - ./nginx:/etc/nginx/conf.d
+            - ./nginx/ssl:/etc/nginx/conf.d/ssl
+        depends_on:
+            - klassroom
+
+        networks:
+            - common-net
+
+
+networks:
+    common-net:
+        external: true
+
+volumes:
+    klassroom:
