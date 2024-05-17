@@ -54,13 +54,13 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <router-link to="route('user')" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Widgets
                             <span class="right badge badge-danger">New</span>
                         </p>
-                    </a>
+                    </router-link>
                 </li>
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">

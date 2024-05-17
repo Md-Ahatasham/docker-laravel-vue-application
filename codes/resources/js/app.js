@@ -15,8 +15,11 @@ import { createApp } from 'vue';
 
 const app = createApp({});
 
-import ExampleComponent from './components/ExampleComponent.vue';
-app.component('example-component', ExampleComponent);
+import AdminEntryPoint from './components/AdminEntryPoint.vue';
+app.component('admin-component', AdminEntryPoint);
+
+import router from './routes/route';
+
 
 /**
  * The following block of code may be used to automatically register your
@@ -36,4 +39,4 @@ app.component('example-component', ExampleComponent);
  * scaffolding. Otherwise, you will need to add an element yourself.
  */
 
-app.mount('#app');
+app.use(router).mount('#app')

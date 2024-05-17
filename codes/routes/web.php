@@ -18,6 +18,18 @@ Route::get('/', function () {
     return view('auth/login');
 });
 
-Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::group(['middleware' => ['auth']], function () {
+
+    Route::get('/', 'HomeController@index');
+    Route::get('dashboard', 'HomeController@index');
+    Route::get('/login', 'HomeController@index');
+//    Route::resource('roles','RoleController');
+    Route::resource('users','HomeController');
+//    Route::resource('activityLogs','ActivityLogController');
+
+});
+
+Auth::routes(['verify' => true]);
+Auth::routes();
